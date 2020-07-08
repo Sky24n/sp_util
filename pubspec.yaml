@@ -1,5 +1,5 @@
 name: sp_util
-description: Flutter SharedPreferences Util.
+description: Flutter shared_preferences plugin Util.
 version: 1.0.0
 author: Sky24n <863764940@qq.com>
 homepage: https://github.com/Sky24n/sp_util
