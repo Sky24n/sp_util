@@ -1,12 +1,12 @@
 # sp_util
 [![Pub](https://img.shields.io/pub/v/sp_util.svg?style=flat-square&color=009688)](https://pub.dartlang.org/packages/sp_util)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Pub](https://img.shields.io/pub/v/sp_util.svg?style=flat-square&color=2196F3)](https://pub.flutter-io.cn/packages/sp_util)
 
-Flutter shared_preferences plugin util, support get default value, save object, object list.
+Flutter shared_preferences plugin util, support get default value, save object, object list. Use SharedPreferences easily.
 
 ### Pub
 ```yaml
 dependencies:
-  sp_util: ^1.0.0
+  sp_util: ^1.0.1
 ```
 
 ### APIs

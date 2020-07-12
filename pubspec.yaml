@@ -1,6 +1,6 @@
 name: sp_util
-description: Flutter shared_preferences plugin Util.
-version: 1.0.0
+description: Flutter shared_preferences plugin Util, support get default value, save object, object list.
+version: 1.0.1
 author: Sky24n <863764940@qq.com>
 homepage: https://github.com/Sky24n/sp_util
 
