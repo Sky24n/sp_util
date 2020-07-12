@@ -1,8 +1,9 @@
+import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:sp_util/sp_util.dart';
 
-import 'models.dart';
-
+/// Example Two.
+/// add SplashPage, complete sp initialization on the SplashPage. Then you can use it synchronously to the homepage。
 class MyApp2 extends StatefulWidget {
   @override
   _MyApp2State createState() => _MyApp2State();
@@ -16,15 +17,9 @@ class _MyApp2State extends State<MyApp2> {
   }
 
   void _initAsync() async {
-    /// App启动时读取Sp数据，需要异步等待Sp初始化完成。
+    ///  await sp initialization to complete.
     await SpUtil.getInstance();
-
-    /// 同步使用Sp。
-    SpUtil.remove("username");
-    String defName = SpUtil.getString("username", defValue: "sky");
-    SpUtil.putString("username", "sky24");
-    String name = SpUtil.getString("username");
-    print("MyApp defName: $defName, name: $name");
+    String userName = SpUtil.getString("username");
   }
 
   @override
@@ -52,18 +47,29 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  String _info = '';
+  TimerUtil _timerUtil;
+  int _count = 3;
+  int _type = 0;
 
   @override
   void initState() {
     super.initState();
+    _timerUtil = TimerUtil(mTotalTime: 3000);
+    _timerUtil.setOnTimerTickCallback((ms) {
+      _count = ms ~/ 1000;
+      setState(() {});
+      if (_count == 0) {
+        _goMain();
+      }
+    });
     _initAsync();
   }
 
   void _initAsync() async {
-    /// App启动时读取Sp数据，需要异步等待Sp初始化完成。
-    await SpUtil.getInstance();
-    Future.delayed(Duration(milliseconds: 500), () {
+    Future.delayed(Duration(milliseconds: 500), () async {
+      /// await SpUtil initialization to complete.
+      await SpUtil.getInstance();
+
       /// 同步使用Sp。
       /// 是否显示引导页。
       if (SpUtil.getBool("key_guide", defValue: true)) {
@@ -75,21 +81,44 @@ class _SplashPageState extends State<SplashPage> {
     });
   }
 
+  /// show add guide
   /// App引导页逻辑。
   void _initBanner() {
-    setState(() {
-      _info = "引导页～";
-    });
+    _type = 1;
+    setState(() {});
+
+    ///
   }
 
+  /// show ad.
   /// App广告页逻辑。
   void _initSplash() {
-    setState(() {
-      _info = "广告页，2秒后跳转到主页";
-    });
-    Future.delayed(Duration(milliseconds: 2000), () {
-      Navigator.of(context).pushReplacementNamed('/MainPage');
-    });
+    _type = 2;
+    _timerUtil.startCountDown();
+  }
+
+  void _goMain() {
+    Navigator.of(context).pushReplacementNamed('/MainPage');
+  }
+
+  @override
+  void dispose() {
+    _timerUtil?.cancel();
+    super.dispose();
+  }
+
+  String getInfo() {
+    String info = '';
+    switch (_type) {
+      case 1:
+        info = 'Guide Page';
+        break;
+      case 2:
+        info = 'Ad $_count';
+        break;
+    }
+    LogUtil.e("getInfo info: $info");
+    return info;
   }
 
   @override
@@ -99,14 +128,11 @@ class _SplashPageState extends State<SplashPage> {
         title: Text("Splash"),
       ),
       body: Center(
-        child: Text("$_info"),
+        child: Text(getInfo()),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          bool isGuide = SpUtil.getBool("key_guide", defValue: true);
-          if (isGuide) {
-            Navigator.of(context).pushReplacementNamed('/MainPage');
-          }
+          _goMain();
         },
         child: Icon(Icons.navigate_next),
       ),
@@ -126,36 +152,8 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 
-    /// 同步使用Sp。
-
-    /// 存取基础类型
-    SpUtil.putString("username", "Sky24n");
+    /// use sp.
     String userName = SpUtil.getString("username");
-    print("MyHomePage userName: " + userName);
-
-    bool isFirst = SpUtil.getBool("userName", defValue: true);
-    SpUtil.putBool("isFirst", false);
-    print("MyHomePage isFirst: $isFirst");
-
-    /// save object example.
-    /// 存储实体对象示例。
-    City city = City();
-    city.name = "成都市";
-    SpUtil.putObject("loc_city", city);
-
-    City hisCity = SpUtil.getObj("loc_city", (v) => City.fromJson(v));
-    print("City: " + (hisCity == null ? "null" : hisCity.toString()));
-
-    /// save object list example.
-    /// 存储实体对象list示例。
-    List<City> list = List();
-    list.add(City(name: "成都市"));
-    list.add(City(name: "北京市"));
-    SpUtil.putObjectList("loc_city_list", list);
-
-    List<City> _cityList =
-        SpUtil.getObjList("loc_city_list", (v) => City.fromJson(v));
-    print("City list: " + (_cityList == null ? "null" : _cityList.toString()));
   }
 
   @override
@@ -165,7 +163,8 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text("Home"),
       ),
       body: Center(
-        child: Text(SpUtil.getString("username")),
+        child:
+            Text('UserName: ${SpUtil.getString("username", defValue: null)}'),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:sp_util/sp_util.dart';
 
@@ -5,12 +6,12 @@ import 'example2.dart';
 import 'models.dart';
 
 /// Example One.
-/// await SpUtil initialization to complete before running the app.
+/// await sp initialization to complete before running the app.
 /// sp init time release about 30ms，debug about 100ms.(Test on Android.)
 //  int old = DateTime.now().millisecondsSinceEpoch;
 //  await SpUtil.getInstance();
 //  int now = DateTime.now().millisecondsSinceEpoch;
-//  print('sp init time: ${now - old}');
+//  LogUtil.e('sp init time: ${now - old}');
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SpUtil.getInstance();
@@ -59,12 +60,14 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+
+    /// use sp.
     _counter = SpUtil.getInt(spLastCounter, defValue: 0);
 
     /// examples
     SpUtil.putString("username", "sky24");
     String userName = SpUtil.getString("username", defValue: "");
-    print("thll userName: " + userName);
+    LogUtil.e("userName: " + userName);
 
     /// save object example.
     /// 存储实体对象示例。
@@ -73,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
     SpUtil.putObject("loc_city", city);
 
     City hisCity = SpUtil.getObj("loc_city", (v) => City.fromJson(v));
-    print("thll City: " + (hisCity == null ? "null" : hisCity.toString()));
+    LogUtil.e("City: " + (hisCity == null ? "null" : hisCity.toString()));
 
     /// save object list example.
     /// 存储实体对象list示例。
@@ -84,8 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     List<City> dataList =
         SpUtil.getObjList("loc_city_list", (v) => City.fromJson(v));
-    print(
-        "thll CityList: " + (dataList == null ? "null" : dataList.toString()));
+    LogUtil.e("CityList: " + (dataList == null ? "null" : dataList.toString()));
   }
 
   @override
