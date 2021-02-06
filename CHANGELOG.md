@@ -1,3 +1,7 @@
+## [1.0.2]
+
+* TODO: Add reload method.
+
 ## [1.0.1]
 
 * TODO: fix desc.

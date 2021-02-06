@@ -158,30 +158,41 @@ class SpUtil {
 
   /// have key.
   static bool haveKey(String key) {
-    if (_prefs == null) return null;
-    return _prefs.getKeys().contains(key);
+    return _prefs?.getKeys()?.contains(key);
+  }
+
+  /// contains Key.
+  static bool containsKey(String key) {
+    return _prefs?.containsKey(key);
   }
 
   /// get keys.
   static Set<String> getKeys() {
-    if (_prefs == null) return null;
-    return _prefs.getKeys();
+    return _prefs?.getKeys();
   }
 
   /// remove.
   static Future<bool> remove(String key) {
-    if (_prefs == null) return null;
-    return _prefs.remove(key);
+    return _prefs?.remove(key);
   }
 
   /// clear.
   static Future<bool> clear() {
-    if (_prefs == null) return null;
-    return _prefs.clear();
+    return _prefs?.clear();
+  }
+
+  /// Fetches the latest values from the host platform.
+  static Future<void> reload() {
+    return _prefs?.reload();
   }
 
   ///Sp is initialized.
   static bool isInitialized() {
     return _prefs != null;
+  }
+
+  /// get Sp.
+  static SharedPreferences getSp() {
+    return _prefs;
   }
 }
