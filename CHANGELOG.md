@@ -1,3 +1,7 @@
+## [2.0.0]
+
+* TODO: Migrate to null-safety.
+
 ## [1.0.2]
 
 * TODO: Add reload method.

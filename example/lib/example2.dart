@@ -20,6 +20,7 @@ class _MyApp2State extends State<MyApp2> {
     ///  await sp initialization to complete.
     await SpUtil.getInstance();
     String userName = SpUtil.getString("username");
+    print('userName: $userName');
   }
 
   @override
@@ -154,6 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     /// use sp.
     String userName = SpUtil.getString("username");
+    print('userName: $userName');
   }
 
   @override

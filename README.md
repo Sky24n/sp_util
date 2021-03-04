@@ -6,7 +6,7 @@ Flutter shared_preferences plugin util, support get default value, save object, 
 ### Pub
 ```yaml
 dependencies:
-  sp_util: ^1.0.2
+  sp_util: ^2.0.0
 ```
 
 ### APIs
@@ -116,5 +116,9 @@ dependencies:
   # https://github.com/Sky24n/flustars
   flustars: ^0.3.3
   # https://github.com/Sky24n/sp_util
-  sp_util: ^1.0.2
+  sp_util: ^2.0.0
 ```
+
+## Changelog
+
+Please see the [Changelog](CHANGELOG.md) page to know what's recently changed.

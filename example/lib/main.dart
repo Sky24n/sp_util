@@ -80,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     /// save object list example.
     /// 存储实体对象list示例。
-    List<City> list = List();
+    List<City> list = [];
     list.add(City(name: "成都市"));
     list.add(City(name: "北京市"));
     SpUtil.putObjectList("loc_city_list", list);
