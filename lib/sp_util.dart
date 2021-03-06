@@ -143,7 +143,7 @@ class SpUtil {
 
   /// have key.
   static bool? haveKey(String key) {
-    return _prefs?.getKeys()?.contains(key);
+    return _prefs?.getKeys().contains(key);
   }
 
   /// contains Key.
