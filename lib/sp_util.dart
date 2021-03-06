@@ -72,7 +72,7 @@ class SpUtil {
     List<Map>? dataList = getObjectList(key);
     List<T>? list = dataList?.map((value) {
       return f(value);
-    })?.toList();
+    }).toList();
     return list ?? defValue;
   }
 
@@ -82,7 +82,7 @@ class SpUtil {
     return dataLis?.map((value) {
       Map _dataMap = json.decode(value);
       return _dataMap;
-    })?.toList();
+    }).toList();
   }
 
   /// get string.

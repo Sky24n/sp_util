@@ -6,7 +6,7 @@ Flutter shared_preferences plugin util, support get default value, save object, 
 ### Pub
 ```yaml
 dependencies:
-  sp_util: ^2.0.0
+  sp_util: ^2.0.1
 ```
 
 ### APIs
