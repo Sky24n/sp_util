@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -62,20 +62,25 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
 
     /// use sp.
-    _counter = SpUtil.getInt(spLastCounter, defValue: 0);
+    _counter = SpUtil.getInt(spLastCounter, defValue: 0)!;
 
-    /// examples
-    SpUtil.putString("username", "sky24");
-    String userName = SpUtil.getString("username", defValue: "");
-    LogUtil.e("userName: " + userName);
+    test();
+//    /// examples
+//    SpUtil.putString("username", "sky24");
+//    String? userName = SpUtil.getString("username", defValue: "");
+//    LogUtil.e("userName: $userName");
+//
+//    SpUtil.putString("username1", "sky24 1");
+//    String? userName1 = SpUtil.getString("username1", defValue: "");
+//    LogUtil.e("userName1: $userName1");
 
     /// save object example.
     /// 存储实体对象示例。
-    City city = City();
-    city.name = "成都市";
+    City city = City(name: "成都市");
     SpUtil.putObject("loc_city", city);
 
-    City hisCity = SpUtil.getObj("loc_city", (v) => City.fromJson(v));
+    City? hisCity = SpUtil.getObj(
+        "loc_city", (v) => City.fromJson(v as Map<String, dynamic>));
     LogUtil.e("City: " + (hisCity == null ? "null" : hisCity.toString()));
 
     /// save object list example.
@@ -85,9 +90,20 @@ class _MyHomePageState extends State<MyHomePage> {
     list.add(City(name: "北京市"));
     SpUtil.putObjectList("loc_city_list", list);
 
-    List<City> dataList =
-        SpUtil.getObjList("loc_city_list", (v) => City.fromJson(v));
+    List<City>? dataList = SpUtil.getObjList(
+        "loc_city_list", (v) => City.fromJson(v as Map<String, dynamic>));
     LogUtil.e("CityList: " + (dataList == null ? "null" : dataList.toString()));
+  }
+
+  void test() async {
+    /// examples
+    await SpUtil.putString("username", "sky24");
+    String? userName = SpUtil.getString("username", defValue: "");
+    LogUtil.e("userName: $userName");
+
+    await SpUtil.putString("username1", "sky24 1");
+    String? userName1 = SpUtil.getString("username1", defValue: "");
+    LogUtil.e("userName1: $userName1");
   }
 
   @override

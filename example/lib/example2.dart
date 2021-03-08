@@ -19,7 +19,7 @@ class _MyApp2State extends State<MyApp2> {
   void _initAsync() async {
     ///  await sp initialization to complete.
     await SpUtil.getInstance();
-    String userName = SpUtil.getString("username");
+    String? userName = SpUtil.getString("username");
     print('userName: $userName');
   }
 
@@ -41,14 +41,14 @@ class _MyApp2State extends State<MyApp2> {
 
 /// 闪屏页。
 class SplashPage extends StatefulWidget {
-  SplashPage({Key key}) : super(key: key);
+  SplashPage({Key? key}) : super(key: key);
 
   @override
   _SplashPageState createState() => _SplashPageState();
 }
 
 class _SplashPageState extends State<SplashPage> {
-  TimerUtil _timerUtil;
+  late TimerUtil _timerUtil;
   int _count = 3;
   int _type = 0;
 
@@ -73,7 +73,7 @@ class _SplashPageState extends State<SplashPage> {
 
       /// 同步使用Sp。
       /// 是否显示引导页。
-      if (SpUtil.getBool("key_guide", defValue: true)) {
+      if (SpUtil.getBool("key_guide", defValue: true)!) {
         SpUtil.putBool("key_guide", false);
         _initBanner();
       } else {
@@ -104,7 +104,7 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   void dispose() {
-    _timerUtil?.cancel();
+    _timerUtil.cancel();
     super.dispose();
   }
 
@@ -142,7 +142,7 @@ class _SplashPageState extends State<SplashPage> {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+  MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -154,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
 
     /// use sp.
-    String userName = SpUtil.getString("username");
+    String? userName = SpUtil.getString("username");
     print('userName: $userName');
   }
 

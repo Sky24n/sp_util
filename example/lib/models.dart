@@ -1,7 +1,7 @@
 class City {
   String name;
 
-  City({this.name});
+  City({required this.name});
 
   /// must.
   City.fromJson(Map<String, dynamic> json) : name = json['name'];

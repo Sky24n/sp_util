@@ -1,6 +1,6 @@
 name: sp_util
 description: Flutter shared_preferences plugin util, support get default value, save object, object list.
-version: 2.0.2
+version: 2.0.3
 homepage: https://github.com/Sky24n/sp_util
 
 environment:
